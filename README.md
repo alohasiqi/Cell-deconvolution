@@ -4,15 +4,19 @@ Siqi Sun1, Shweta Yadav1, Mulini Pingili1, Dan Chang1, Jing Wang1*
 
 1 Genomics Research Center, AbbVie, 200 Sidney Street, Cambridge, MA 02139
 
-This the repo for the code in the preprint https://scholar.google.com/citations?view_op=view_citation&hl=en&user=sjt8cbcAAAAJ&citation_for_view=sjt8cbcAAAAJ:Se3iqnhoufwC
+This is the repo for the code in the preprint https://scholar.google.com/citations?view_op=view_citation&hl=en&user=sjt8cbcAAAAJ&citation_for_view=sjt8cbcAAAAJ:Se3iqnhoufwC
 
 ## Analyses workflow
-
+### Installation
+To install the R package (DeconvRef) for building user-defined cell reference matrix via Github, run the following commands in R:
+```
+remotes::install_github("alohasiqi/DeconvRef")
+```
 
 ## Key Points
-### Tissue-derived CRMs showed higher goodness-of-fit compared to blood-derived CRMs for deconvolving bulk tissue transcriptomics.
-### All CRMs yield consistent goodness-of-fit for deconvolving bulk blood transcriptomics.
-### Tissue-derived CRMs represent more accurate cellular proportion estimates and reveal more treatment-related cell types, and the specific tissue type is relevant to the deconvolution performance.
+- Tissue-derived CRMs showed higher goodness-of-fit compared to blood-derived CRMs for deconvolving bulk tissue transcriptomics.
+- All CRMs yield consistent goodness-of-fit for deconvolving bulk blood transcriptomics.
+- Tissue-derived CRMs represent more accurate cellular proportion estimates and reveal more treatment-related cell types, and the specific tissue type is relevant to the deconvolution performance.
 
 ## Abstract
 ### Background 
