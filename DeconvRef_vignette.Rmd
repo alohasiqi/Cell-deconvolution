@@ -1,0 +1,53 @@
+---
+title: "DeconvRef"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{DeconvRef}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+This package provides a guidance for user to build their own reference matrix (CRM) for cell deconvolution using scRNA-seq.
+
+```{r setup}
+library(DeconvRef)
+```
+
+Here we explain the functions of the package and present examples of applying DeconvRef to build and save their own CRMs.
+
+**STEP 1**
+
+The `pseudobulk_deg()` function returns the differential expressed genes (DEGs) that will be used to build the CRMs. User will need to laod their own scRNA-seq that used to construct the pseudobulk. By default, several QC for scRNA-seq involved removing cells with abnormal gene counts and mitochondrial levels (percent. mt < 25 & nFeature_RNA > 100 & nFeature_RNA < 5000), and keeping only cell types with more than 500 cells (150 cells for LUAD). Genes were excluded if expressed in fewer than 20% of cells in the smallest cell type of each dataset or if they mapped to HLA, immunoglobulin, mitochondrial (MT), ribosomal protein (RP), or RNA gene families. Further, DEGs were identified using the Limma/Voom method. 
+
+```{r}
+pseudobulk_deg(analysis_name="test", 
+                       file="data/test.nsclc.seur.meta.norm.qc.rds", 
+                       path="/your_path/", 
+                       celltype="cluster_annot", 
+                       sample_id="sample_name", 
+                       top_deg_num=50)
+```
+
+**STEP 2**
+
+With selected DEGs, recursive feature elimination (RFE) with a random forest model will be further used to find representative marker genes.
+The `cell_type_markers()` function returns the max-ROC associated with different number of marker genes and the summary stats.
+```{r}
+cell_type_markers(path="/your_path/", analysis_name="test", top_deg_num=50)
+```
+
+**STEP 3**
+
+CRM will be constructed by calculating the mean expression of selected markers for each cell type.
+The `gen_CRM()` function returns the CRM.
+```{r}
+gen_CRM(path="/your_path/", analysis_name="test")
+```
